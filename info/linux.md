@@ -11,4 +11,6 @@
 11. git status
 12. git add *
 13. git commit -m"initial commit"
-14. 
+14. check branch git branch -M main
+15. git remote add employeemgmt-ui https://github.com/chinthalapudigayathri/employeemgmt-ui
+16. push changes using  git push -u origin main
