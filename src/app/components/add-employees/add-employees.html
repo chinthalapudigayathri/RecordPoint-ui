@@ -1,0 +1,7 @@
+<h2>Add Employee</h2>
+<form (ngSubmit)="submit()">
+  <input [(ngModel)]="model.username" name="username" placeholder="Username" required />
+  <input [(ngModel)]="model.email" name="email" placeholder="Email" required />
+  <input [(ngModel)]="model.password" name="password" placeholder="Password" required />
+  <button type="submit">Add</button>
+</form>
