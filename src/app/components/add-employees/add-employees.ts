@@ -1,47 +1,40 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+
+// ✅ Import both from the same file
+import { EmployeeService, Employee } from '../../services/employee';
 
 @Component({
-  selector: 'app-add-employee',
   standalone: true,
+  selector: 'app-add-employee',
+  template: `
+    <h2>Add Employee</h2>
+    <form (ngSubmit)="addEmployee()">
+      <input [(ngModel)]="employee.username" name="username" placeholder="Username" required>
+      <input [(ngModel)]="employee.email" name="email" placeholder="Email" required>
+      <input [(ngModel)]="employee.password" name="password" placeholder="Password" required>
+      <input [(ngModel)]="employee.roles[0]" name="roles" placeholder="Role" required>
+      <button type="submit">Add</button>
+    </form>
+  `,
   imports: [CommonModule, FormsModule, HttpClientModule],
-  templateUrl: './add-employees.html',
-  styleUrls: ['./add-employees.css']
+  providers: [EmployeeService]
 })
 export class AddEmployeeComponent {
-  // Model bound to form inputs
-  model = {
+  employee: Employee = {
     username: '',
     email: '',
     password: '',
-    roles: ['USER'],
-    enabled: true
+    roles: ['']
   };
 
-  message = '';
-  error = '';
-  saving = false;
+  constructor(private employeeService: EmployeeService) {}
 
-  constructor(private http: HttpClient) {}
-
-  submit(): void {
-    this.saving = true;
-    this.http.post('http://localhost:8080/api/employees', this.model).subscribe({
-      next: (response: any) => {
-        this.message = `✅ Employee ${response.username} created successfully`;
-        this.error = '';
-        this.saving = false;
-        // reset form
-        this.model = { username: '', email: '', password: '', roles: ['USER'], enabled: true };
-      },
-      error: (err) => {
-        console.error('Error creating employee', err);
-        this.error = '❌ Failed to create employee';
-        this.message = '';
-        this.saving = false;
-      }
+  addEmployee() {
+    this.employeeService.addEmployee(this.employee).subscribe(() => {
+      alert('Employee added!');
     });
   }
 }

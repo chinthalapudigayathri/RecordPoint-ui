@@ -1,17 +1,22 @@
-<header class="header">
-  <h1>Employee Management</h1>
-  <button (click)="login()">Login with GitHub</button>
-</header>
+ <header class="header">
+    <h1>Employee Management</h1>
+    <button (click)="login()">Login with GitHub</button>
+  </header>
+<div class="container">
+ 
 
-<nav class="sidebar">
-  <ul>
-    <li><a routerLink="/view" routerLinkActive="active">View Employees</a></li>
-    <li><a routerLink="/add" routerLinkActive="active">Add Employee</a></li>
-    <li><a routerLink="/update" routerLinkActive="active">Update Employee</a></li>
-    <li><a routerLink="/delete" routerLinkActive="active">Delete Employee</a></li>
-  </ul>
-</nav>
+  <div class="main-layout">
+    <nav class="sidebar">
+      <ul>
+        <li><a routerLink="/view" routerLinkActive="active">View Employees</a></li>
+        <li><a routerLink="/add" routerLinkActive="active">Add Employee</a></li>
+        <li><a routerLink="/update" routerLinkActive="active">Update Employee</a></li>
+        <li><a routerLink="/delete" routerLinkActive="active">Delete Employee</a></li>
+      </ul>
+    </nav>
 
-<main class="content">
-  <router-outlet></router-outlet>
-</main>
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

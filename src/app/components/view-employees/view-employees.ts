@@ -1,25 +1,38 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Employee, EmployeeService } from '../../services/employee';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-view-employees',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
-  templateUrl: './view-employees.html',
-  styleUrl: './view-employees.css',
+  selector: 'app-view-employees',
+  imports: [CommonModule, FormsModule, HttpClientModule],
+  templateUrl: './view-employees.html',   
+  styleUrls: ['./view-employees.css'],
 })
-export class ViewEmployees implements OnInit{
-  employees: any[] = [];
+export class ViewEmployees implements OnInit {
+  employees: Employee[] = [];
+  id: number | null = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private employeeService: EmployeeService) {}
 
-  ngOnInit(): void {
-   this.http.get<any[]>('http://localhost:8080/api/employees').subscribe({
-      next: (data) => this.employees = data,
-      error: (err) => console.error('❌ Failed to fetch employees', err)
+  ngOnInit() {
+    this.loadAll(); // auto-load employees when page opens
+  }
+
+  loadAll() {
+    this.employeeService.getAllEmployees().subscribe(data => {
+      console.log('Employees from backend:', data); // debug
+      this.employees = data;
     });
 
+  }
+
+  searchById() {
+    if (this.id !== null) {
+      this.employeeService.getEmployeeById(this.id).subscribe(emp => this.employees = [emp]);
+    }
   }
 
 }

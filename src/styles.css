@@ -2,6 +2,7 @@
 html, body {
   margin: 0;
   padding: 0;
+  flex-direction: column;
   height: 100%;
 }
 /* Layout container */
@@ -42,11 +43,19 @@ html, body {
 }
 
 /* Main content area */
+
 .content {
   flex-grow: 1;
   padding: 2rem;
   background-color: #f5f7fa;
   font-family: 'Segoe UI', sans-serif;
+
+  /* ✅ new centering rules */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* vertical centering */
+  align-items: center;       /* horizontal centering */
+  min-height: 100vh;         /* ensure it fills viewport height */
 }
 
 /* Header styles */
@@ -124,3 +133,9 @@ input {
   color: #1a237e;
   font-weight: bold;
 }
+
+.main-layout {
+  display: flex;
+  flex: 1; /* take remaining space below header */
+}
+

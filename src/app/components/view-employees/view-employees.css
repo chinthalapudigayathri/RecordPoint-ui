@@ -1,0 +1,8 @@
+.centered-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* vertical centering */
+  align-items: center;       /* horizontal centering */
+  min-height: 100vh;         /* make container fill the viewport height */
+  gap: 12px;                 /* spacing between elements */
+}

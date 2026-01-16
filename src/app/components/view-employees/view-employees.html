@@ -1,4 +1,12 @@
 
+<h2>View Employees</h2>
+<!-- Search by ID -->
+<input type="number" [(ngModel)]="id" placeholder="Enter Employee ID" />
+<button (click)="searchById()">Search</button>
+
+<!-- Or load all -->
+<button (click)="loadAll()">Load All Employees</button>
+
 <ul>
   <li *ngFor="let emp of employees">
     {{ emp.username }} - {{ emp.email }}
